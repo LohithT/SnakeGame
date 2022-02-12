@@ -15,7 +15,7 @@ def setUpScreen():
     wn = turtle.Screen()
     wn.title('Snake Game')
     wn.bgcolor('light blue')
-    wn.setup(width=800, height=600)
+    wn.setup(width=600, height=600)
     # Turns off the screen updates
     return wn
 
