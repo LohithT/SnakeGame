@@ -41,13 +41,10 @@ def createSnakeHead():
     # Set speed, shape, color and move it center of the screen
     head.speed(0) # @lohith speed should be 0(Done)
     head.shape('square')
-    head.color('red')
-    
-     
+    head.color('orange')
     # @lohith penup and goto missing(Done)
-    head.penup
-    head.goto
-
+    head.penup()
+    head.goto(0,0)
     # Set direction as stop
     head.direction = "stop"
     return head
@@ -100,13 +97,15 @@ def go_right():
         
 
 # Bind Up, Down, Left and Right keys with their function
-def bindKeyboardKeys(win):
-    # @lohith missing listener instance
+def bindKeyboardKeys(wn):
+    # @lohith missing listener instance(Done)
+    
+    wn.listen()
 
-    turtle.onkey(go_up,'Up')
-    turtle.onkey(go_down,'Down')
-    turtle.onkey(go_right,'Right')
-    turtle.onkey(go_left,'Left')
+    wn.onkey(go_up,'Up')
+    wn.onkey(go_down,'Down')
+    wn.onkey(go_right,'Right')
+    wn.onkey(go_left,'Left')
     # remove print statement after implementing this function
     print("bindKeyboardKeys function called")
 
@@ -132,7 +131,7 @@ def moveHead():
 
 # Move segments
 # @lohith function name incorrect - movesegments()(Done)
-def movesegments():
+def moveSegments():
     global segments
     
      # Move the end segments first in reverse order
@@ -176,7 +175,7 @@ def handleCollisionWithBorder(head, trackScore):
     # Make head direction dummy so that it do not move
     head.direction = "stop"
     # Hide the segments
-    for segments in segments:  # @lohith var is segment in segments
+    for segment in segments:  # @lohith var is segment in segments
         segment.goto(1000, 1000)
     # Clear the segments list
     segments.clear()  # @lohith var is segments
@@ -214,7 +213,7 @@ def handleCollisionWithFood(head, trackScore, food):
     new_segment.shape("square")
     new_segment.color("blue")
     new_segment.penup()
-    segment.append(new_segments)  # @lohith var is segments(Done)
+    segments.append(new_segment)  # @lohith var is segments(Done)
     
     # Shorten the delay, to move snake faster
     delay -= 0.001
@@ -251,16 +250,16 @@ while True:
     if detectCollisionWithFood(head, food):
         handleCollisionWithFood(head, trackScore, food)
         
-    movesegments()
+    moveSegments()
     moveHead()    
-
-    # Detect collision of snake body with its head
-    # @lohith incorrect function code here it should be function call function is already defined(Done)
-
-
-
+    
     
 
+    # This is what you are missing @Lohith
+    # Detect collision of snake body with its head
+    if detectCollisionOfHeadWithSegment(head):
+        time.sleep(1)
+        handleCollisionWithBorder(head, trackScore)
         
     # Sleep for time equal to delay to add delay
     time.sleep(delay)
